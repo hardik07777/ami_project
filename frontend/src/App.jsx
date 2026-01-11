@@ -2,28 +2,28 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import AmiCards from "./components/AmiCards";
 
-const API = "http://localhost:4000/api";
+const API = "https://ami-project-49al-por7dsxlk-hardikgoels-projects.vercel.app";
 
 export default function App() {
   const [amis, setAmis] = useState([]);
 
   const loadAmis = async () => {
-    const res = await axios.get(`${API}/ami`);
+    const res = await axios.get(`${API}/`);
     setAmis(res.data);
   };
 
   const buildAmi = async () => {
-    await axios.post(`${API}/ami/build`);
+    await axios.post(`${API}/build`);
     loadAmis();
   };
 
   const publishAmi = async (id) => {
-    await axios.post(`${API}/ami/publish`, { id });
+    await axios.post(`${API}/publish`, { id });
     loadAmis();
   };
 
   const retryAmi = async (id) => {
-    await axios.post(`${API}/ami/retry`, { id });
+    await axios.post(`${API}/retry`, { id });
     loadAmis();
   };
 
