@@ -1,8 +1,3 @@
 {
-  "version": 2,
-  "functions": {
-    "api/ami.js": {
-      "runtime": "nodejs18"
-    }
-  }
+  "version": 2
 }
