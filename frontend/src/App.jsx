@@ -8,7 +8,7 @@ export default function App() {
   const [amis, setAmis] = useState([]);
 
   const loadAmis = async () => {
-    const res = await axios.get(`${API}/`);
+    const res = await axios.get(API);
     setAmis(res.data);
   };
 
