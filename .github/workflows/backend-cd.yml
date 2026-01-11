@@ -1,0 +1,38 @@
+name: Backend CD (Version Bump)
+
+on:
+  workflow_run:
+    workflows: ["Backend CI"]
+    types:
+      - completed
+
+jobs:
+  version-bump:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Bump patch version
+        working-directory: Backend
+        run: |
+          npm version patch --no-git-tag-version
+
+      - name: Commit version bump
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add Backend/package.json
+          git commit -m "chore: auto bump backend version"
+
+      - name: Push changes
+        run: git push
