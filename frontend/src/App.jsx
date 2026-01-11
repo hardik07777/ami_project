@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import AmiCards from "./components/AmiCards";
 
-const API = "https://ami-project-49al-por7dsxlk-hardikgoels-projects.vercel.app";
+const API = "https://ami-project-49al-por7dsxlk-hardikgoels-projects.vercel.app/api/ami";
 
 export default function App() {
   const [amis, setAmis] = useState([]);
