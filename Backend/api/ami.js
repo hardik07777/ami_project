@@ -104,4 +104,6 @@ app.post("/publish", (req, res) => {
 });
 
 
-module.exports = app;
+module.exports = (req, res) => {
+  app(req, res);
+};

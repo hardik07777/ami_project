@@ -1,15 +1,8 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/ami.js",
-      "use": "@vercel/node"
+  "functions": {
+    "api/ami.js": {
+      "runtime": "nodejs18.x"
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/api/ami.js"
-    }
-  ]
+  }
 }
