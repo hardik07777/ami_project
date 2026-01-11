@@ -53,6 +53,8 @@ export default function App() {
   </h2>
 
   <button
+      onClick={buildAmi}
+
     style={{
       padding: "10px 16px",
       background: "#2563eb",
