@@ -52,7 +52,6 @@ export default function LifecycleStepper({ status }) {
       FAILED
     </div>
   )}
-</div>
-
+    </div>
   );
 }

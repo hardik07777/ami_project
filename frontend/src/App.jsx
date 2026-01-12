@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import AmiCards from "./components/AmiCards";
+import AmiCard from "./components/AmiCards";
 
 const API ="https://ami-project-git-main-hardikgoels-projects.vercel.app/api/ami";
 
@@ -29,8 +29,8 @@ export default function App() {
 
   useEffect(() => {
     loadAmis();
-    const timer = setInterval(loadAmis, 2000);
-    return () => clearInterval(timer);
+    // const timer = setInterval(loadAmis, 2000);
+    // return () => clearInterval(timer);
   }, []);
 
   return (
@@ -72,7 +72,7 @@ export default function App() {
       {/* Grid */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(360px, 1fr))",gap: 24, marginTop: 24}}>
         {amis.map((ami) => (
-          <AmiCards
+          <AmiCard
             key={ami.ami_id}
             ami={ami}
             onPublish={publishAmi}

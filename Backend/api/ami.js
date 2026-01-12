@@ -62,7 +62,7 @@ router.post("/retry", (req, res) => {
   ami.status = "BUILDING";
 
   setTimeout(() => {
-    ami.status = "AVAILABLE";
+    ami.status = Math.random() < 0.3 ? "FAILED" : "AVAILABLE";
   }, 3000);
 
   res.json(ami);
