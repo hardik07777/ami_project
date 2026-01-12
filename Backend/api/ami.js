@@ -5,26 +5,18 @@ const router = express.Router();
 let amis = [];
 let currentVersion = "v1.0.0";
 
-/**
- * GET /
- * List all AMIs
- */
+// GET /api/ami
 router.get("/", (req, res) => {
   res.json(amis);
 });
 
-/**
- * GET /:id
- * Get AMI by ID
- */
+// GET /api/ami/:id
 router.get("/:id", (req, res) => {
   const ami = amis.find(a => a.ami_id === req.params.id);
   res.json(ami || {});
 });
 
-/**
- * POST /build
- */
+// POST /api/ami/build
 router.post("/build", (req, res) => {
   const ami = {
     ami_id: `ami-${Date.now()}`,
@@ -47,6 +39,7 @@ router.post("/build", (req, res) => {
   res.status(201).json(ami);
 });
 
+// POST /api/ami/retry
 router.post("/retry", (req, res) => {
   const { id } = req.body;
   const ami = amis.find(a => a.ami_id === id);
@@ -68,6 +61,7 @@ router.post("/retry", (req, res) => {
   res.json(ami);
 });
 
+// POST /api/ami/publish
 router.post("/publish", (req, res) => {
   const { id } = req.body;
   const ami = amis.find(a => a.ami_id === id);

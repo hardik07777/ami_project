@@ -3,38 +3,23 @@ import cors from "cors";
 import amiRoutes from "./api/ami.js";
 
 const app = express();
+const PORT = 4000;
 
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"]
-  })
-);
-
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("AMI backend running");
+  res.send("AMI backend running locally");
 });
 
 app.use("/api/ami", amiRoutes);
 
-// Error handling middleware (must be before catch-all)
+// error handler
 app.use((err, req, res, next) => {
-  console.error("Express error:", err);
-  if (!res.headersSent) {
-    res.status(err.status || 500).json({
-      error: "Internal Server Error",
-      message: err.message
-    });
-  }
+  console.error(err);
+  res.status(500).json({ error: "Internal Server Error" });
 });
 
-// Catch-all handler for Vercel - must be last
-app.use((req, res) => {
-  res.status(404).json({ error: "Not Found", path: req.path });
+app.listen(PORT, () => {
+  console.log(`✅ Backend running at http://localhost:${PORT}`);
 });
-
-export default app;
-

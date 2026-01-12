@@ -1,14 +1,14 @@
 {
-  "name": "ami-backend",
-  "version": "1.0.10",
-  "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node api/index.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "dependencies": {
-    "cors": "^2.8.5",
     "express": "^4.18.2",
-    "serverless-http": "^4.0.0"
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   }
 }
