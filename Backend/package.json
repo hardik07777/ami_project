@@ -3,9 +3,8 @@
   "version": "1.0.10",
   "private": true,
   "type": "module",
-  "main": "api/ami.js",
   "scripts": {
-    "start": "node api/ami.js"
+    "dev": "node api/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
