@@ -53,33 +53,6 @@ This project provides a system to:
 - Git & GitHub
 - Postman
 
----
-
-## 📂 Project Structure
-
-ami-project/
-│
-├── backend/
-│ ├── routes/
-│ ├── controllers/
-│ ├── services/
-│ ├── app.js
-│ └── server.js
-│
-├── frontend/
-│ ├── src/
-│ │ ├── components/
-│ │ ├── App.jsx
-│ │ └── main.jsx
-│ └── index.html
-│
-└── README.md
-
-yaml
-Copy code
-
----
-
 ## 🔗 API Endpoints
 
 ### Get All AMIs
