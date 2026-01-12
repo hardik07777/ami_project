@@ -1,28 +1,15 @@
-const express = require("express");
-const cors = require("cors");
+import express from "express";
 
-const app = express();
-
-
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"]
-  })
-);app.use(express.json());
-
+const router = express.Router();
 
 let amis = [];
 let currentVersion = "v1.0.0";
-
-
 
 /**
  * GET /
  * List all AMIs
  */
-app.get("/", (req, res) => {
+router.get("/", (req, res) => {
   res.json(amis);
 });
 
@@ -30,16 +17,15 @@ app.get("/", (req, res) => {
  * GET /:id
  * Get AMI by ID
  */
-app.get("/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   const ami = amis.find(a => a.ami_id === req.params.id);
   res.json(ami || {});
 });
 
 /**
  * POST /build
- * Create a new AMI
  */
-app.post("/build", (req, res) => {
+router.post("/build", (req, res) => {
   const ami = {
     ami_id: `ami-${Date.now()}`,
     status: "BUILDING",
@@ -55,15 +41,13 @@ app.post("/build", (req, res) => {
   amis.push(ami);
 
   setTimeout(() => {
-    const shouldFail = Math.random() < 0.3;
-    ami.status = shouldFail ? "FAILED" : "AVAILABLE";
+    ami.status = Math.random() < 0.3 ? "FAILED" : "AVAILABLE";
   }, 3000);
 
   res.status(201).json(ami);
 });
 
-
-app.post("/retry", (req, res) => {
+router.post("/retry", (req, res) => {
   const { id } = req.body;
   const ami = amis.find(a => a.ami_id === id);
 
@@ -72,9 +56,7 @@ app.post("/retry", (req, res) => {
   }
 
   if (ami.status !== "FAILED") {
-    return res
-      .status(400)
-      .json({ error: "Retry allowed only for FAILED AMIs" });
+    return res.status(400).json({ error: "Retry allowed only for FAILED AMIs" });
   }
 
   ami.status = "BUILDING";
@@ -86,8 +68,7 @@ app.post("/retry", (req, res) => {
   res.json(ami);
 });
 
-
-app.post("/publish", (req, res) => {
+router.post("/publish", (req, res) => {
   const { id } = req.body;
   const ami = amis.find(a => a.ami_id === id);
 
@@ -103,6 +84,4 @@ app.post("/publish", (req, res) => {
   res.json(ami);
 });
 
-
-module.exports = serverless(app);
-
+export default router;

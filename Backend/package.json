@@ -2,7 +2,7 @@
   "name": "ami-backend",
   "version": "1.0.9",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "main": "api/ami.js",
   "scripts": {
     "start": "node api/ami.js"
